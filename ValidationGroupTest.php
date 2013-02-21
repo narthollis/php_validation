@@ -24,7 +24,7 @@ class ValidationGroupTest extends PHPUnit_Framework_TestCase {
                 )
             )
         );
-        
+
         $this->validation_group_multi_programatic = new \Validation\ValidationGroup();
         $v = new \Validation\Validator('is_int', function($value) { return is_int($value); }, 'Must be an integer', true);
         $this->validation_group_multi_programatic->addValidator($v);
@@ -53,7 +53,7 @@ class ValidationGroupTest extends PHPUnit_Framework_TestCase {
                 )
             )
         );
-        
+
 
     }
 
@@ -79,6 +79,14 @@ class ValidationGroupTest extends PHPUnit_Framework_TestCase {
 
         $this->assertTrue($this->validation_group_programatic->validate('test'));
         $this->assertTrue($this->validation_group_array->validate('test'));
+    }
+
+    public function testInvalid() {
+        $this->validation_group_programatic->setRequired();
+        $this->validation_group_array->setRequired();
+
+        $this->assertEquals($this->validation_group_programatic->validate('not test'), Array('string_is_test' => 'String must be test'));
+        $this->assertEquals($this->validation_group_array->validate('not test'), Array('string_is_test' => 'String must be test'));
     }
 
     public function testEmptyStringRequired() {
