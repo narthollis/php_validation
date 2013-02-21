@@ -8,8 +8,9 @@ class ValidationGroup {
     protected $required = false;
     protected $validators = Array();
     protected $parent = null;
+    protected $blocking = false;
 
-    public function __construct(Array $validators=Array(), $required=false, ValidationGroup $parent=null) {
+    public function __construct(Array $validators=Array(), $required=false, $blocking=false, ValidationGroup $parent=null) {
         foreach($validators as $validator) {
             $v = $validator;
             if(is_array($validator)) {
@@ -49,6 +50,18 @@ class ValidationGroup {
 
     public function getParent() {
         return $this->parent;
+    }
+
+    public function setBlocking() {
+        $this->blocking = true;
+    }
+
+    public function setNonBlocking() {
+        $this->blocking = false;
+    }
+
+    public function getBlocking() {
+        return $this->blocking;
     }
 
     public function addValidator(Validator $validator) {
