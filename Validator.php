@@ -6,6 +6,7 @@ class Validator {
     public $name;
     public $method;
     public $message;
+    public $blocking;
     public $extraParams;
 
     public function __construct($name, $method, $message, $blocking=false, $extraParams=Array()) {
